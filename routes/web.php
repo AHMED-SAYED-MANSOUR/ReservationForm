@@ -10,7 +10,7 @@ Route::post('/contact/storeInSession', [ContactController::class, 'storeInSessio
 
 
 // Show Coach Form And Save
-Route::get('/coach', [ContactController::class, 'showCoachForm'])->name('coach');
+Route::get('/coach', [ContactController::class, 'showCoachForm'])->name('coach')->middleware('checkRefererRoute');
 Route::post('/saveAllData', [ContactController::class, 'saveAllData'])->name('saveAllData');
 
 Route::get('/success' , [ContactController::class, 'Thankyou'])->name('success');
