@@ -39,7 +39,7 @@
     <div style="color: red;">{{ Session::get('error') }}</div>
 @endif
 
-<form method="post" action="{{ route('saveAllData', $id) }}">
+<form method="post" action="{{ route('saveAllData') }}">
     @csrf
     <label for="CoachName">Choose Coach:</label>
     <select name="CoachName" id="CoachName" required>
@@ -63,6 +63,9 @@
     @error('chosen_datetime')
     <small style="color: red;">{{ $message }}</small>
     @enderror
+    <input type="hidden" name="CoachName" id="CoachName" value="{{ $firstFormData['ClientName'] ?? '' }}">
+    <input type="hidden" name="phone" id="CoachName" value="{{ $firstFormData['phone'] ?? '' }}">
+    <input type="hidden" name="mail" id="CoachName" value="{{ $firstFormData['mail'] ?? '' }}">
 
     <button type="submit">Submit</button>
 </form>

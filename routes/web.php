@@ -6,12 +6,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 
 Route::get('/contact', [ContactController::class, 'index']);
-Route::post('/contact/saveFirst', [ContactController::class, 'store'])->name('saveFirst');
+Route::post('/contact/storeInSession', [ContactController::class, 'storeInSession'])->name('storeInSession');
 
 
 // Show Coach Form And Save
-Route::get('/coach/{id}', [ContactController::class, 'showCoachForm'])->name('coach');
-Route::post('/saveAllData/{id}', [ContactController::class, 'saveAllData'])->name('saveAllData');
+Route::get('/coach', [ContactController::class, 'showCoachForm'])->name('coach');
+Route::post('/saveAllData', [ContactController::class, 'saveAllData'])->name('saveAllData');
 
 Route::get('/success' , [ContactController::class, 'Thankyou'])->name('success');
 

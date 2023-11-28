@@ -16,35 +16,45 @@ class ContactController extends Controller
         return view('contact');
     }
 
-    public function store(ContactRequest $request)
+    public function storeInSession(ContactRequest $request)
     {
-        // Store data in the database
-        $contact = new Contact();
-        $contact->ClientName = $request->input('ClientName');
-        $contact->phone = $request->input('phone');
-        $contact->mail = $request->input('mail');
-        $contact->CoachName = null;
-        $contact->chosen_datetime = null;
-
-        $add = $contact->save();
-        return $add
-            ? redirect()->route('coach', ['id' => $contact->id])->with('success', 'Client Added Successfully')
-            : redirect()->back()->with('error', 'Error occurred while saving.');
-    }
-
-    public function showCoachForm($id)
-    {
-        return view('coach', compact('id'));
-    }
-
-    public function saveAllData(Request $request, $id)
-    {
-        $contact = Contact::find($id);
-
-        $contact->update([
-            'CoachName'=> $request['CoachName'],
-            'chosen_datetime'=>$request['chosen_datetime'],
+        // Store data from the first form in the session
+        session()->put('firstFormData', [
+            'ClientName' => $request->input('ClientName'),
+            'phone' => $request->input('phone'),
+            'mail' => $request->input('mail'),
         ]);
+
+        return redirect()->route('coach')->with('success', 'Data from the first form stored successfully.');
+    }
+
+    public function showCoachForm()
+    {
+        // Retrieve data from the session
+        $firstFormData = session()->get('firstFormData');
+
+        // Pass the data to the coach form
+        return view('coach', compact('firstFormData'));
+    }
+
+    public function saveAllData(ContactRequest $request)
+    {
+        // Retrieve data from the session
+        $firstFormData = session()->get('firstFormData');
+
+        // Create New Contact With All Data
+        $contact = Contact::create([
+            // Add fields from the first form [Session]
+            'ClientName' => $firstFormData['ClientName'],
+            'phone' => $firstFormData['phone'],
+            'mail' => $firstFormData['mail'],
+            // Add fields from the second form
+            'CoachName' => $request['CoachName'],
+            'chosen_datetime' => $request['chosen_datetime'],
+        ]);
+
+        // Clear the session data
+        session()->forget('firstFormData');
 
         return redirect()->route('success');
     }

@@ -37,7 +37,7 @@
     <div style="color: red;">{{ Session::get('error') }}</div>
 @endif
 
-<form method="post" action="{{ route('saveFirst') }}">
+<form method="post" action="{{ route('storeInSession') }}">
     @csrf
     <label for="ClientName">Your Name:</label>
     <input type="text" name="ClientName" id="ClientName">
