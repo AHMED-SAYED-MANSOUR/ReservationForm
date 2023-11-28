@@ -41,12 +41,18 @@
     @csrf
     <label for="ClientName">Your Name:</label>
     <input type="text" name="ClientName" required>
+    @error('')
+    @enderror
 
     <label for="phone">Your Phone Number:</label>
     <input type="text" name="phone" required>
+    @error('')
+    @enderror
 
     <label for="mail">Your Email:</label>
     <input type="email" name="mail" required>
+    @error('')
+    @enderror
 
     <button type="submit">Next</button>
 </form>

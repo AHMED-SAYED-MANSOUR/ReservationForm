@@ -39,17 +39,31 @@
 
 <form method="post" action="{{ route('saveAllData', $id) }}">
     @csrf
-    <label for="CoashName">Choose Coach:</label>
-    <select name="CoashName" required>
+    <label for="CoachName">Choose Coach:</label>
+    <select name="CoachName" required>
         <option value="نورة مسفر">نورة مسفر</option>
         <option value="غسان الاحمدي">غسان الاحمدي</option>
         <option value="نايف اكرد">نايف اكرد</option>
     </select>
 
     <label for="chosen_datetime">Choose Date and Time:</label>
-    <input type="datetime-local" name="chosen_datetime" required>
+    <input id="hours" type="datetime-local" step="3600" name="chosen_datetime" required>
 
     <button type="submit">Submit</button>
 </form>
+
+<script>
+    // Add event listener to enforce hour-only format
+    document.getElementById('hours').addEventListener('input', function (event) {
+        // Get the current input value
+        let inputValue = event.target.value;
+
+        // Format the input value to exclude minutes
+        if (inputValue.length > 16) {
+            event.target.value = inputValue.slice(0, 16);
+        }
+    });
+</script>
+
 </body>
 </html>

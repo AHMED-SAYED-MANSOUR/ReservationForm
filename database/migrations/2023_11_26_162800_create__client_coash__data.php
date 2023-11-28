@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string("phone");
             $table->string("mail");
             // Coach Data
-            $table->string("CoashName");
+            $table->string("CoachName");
             $table->dateTime('chosen_datetime');
 //            $table->date("ReservationDay");
 //            $table->time("ReservationTime");

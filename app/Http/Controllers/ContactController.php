@@ -33,7 +33,7 @@ class ContactController extends Controller
         $contact->phone = $request->input('phone');
         $contact->mail = $request->input('mail');
 
-        $contact->CoashName = null;
+        $contact->CoachName = null;
         $contact->chosen_datetime = null;
 
         $contact->save();
@@ -50,7 +50,7 @@ class ContactController extends Controller
         $contact = Contact::find($id);
 
         $contact->update([
-            'CoashName'=> $request['CoashName'],
+            'CoachName'=> $request['CoachName'],
             'chosen_datetime'=>$request['chosen_datetime'],
         ]);
 
