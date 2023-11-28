@@ -1,17 +1,8 @@
 <?php
 
-//namespace App\Http\Controllers;
-//
-//use Illuminate\Http\Request;
-//
-//class ContactController extends Controller
-//{
-//    //
-//}
-// app/Http/Controllers/ContactController.php
-
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ContactRequest;
 use Illuminate\Http\Request;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Mail;
@@ -25,19 +16,20 @@ class ContactController extends Controller
         return view('contact');
     }
 
-    public function store(Request $request)
+    public function store(ContactRequest $request)
     {
         // Store data in the database
         $contact = new Contact();
         $contact->ClientName = $request->input('ClientName');
         $contact->phone = $request->input('phone');
         $contact->mail = $request->input('mail');
-
         $contact->CoachName = null;
         $contact->chosen_datetime = null;
 
-        $contact->save();
-        return redirect()->route('coach', ['id' => $contact->id]);
+        $add = $contact->save();
+        return $add
+            ? redirect()->route('coach', ['id' => $contact->id])->with('success', 'Client Added Successfully')
+            : redirect()->back()->with('error', 'Error occurred while saving.');
     }
 
     public function showCoachForm($id)

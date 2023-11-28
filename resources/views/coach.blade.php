@@ -33,37 +33,49 @@
 <body>
 <h1>Coach Form</h1>
 
-@if(session('error'))
-    <div style="color: red;">{{ session('error') }}</div>
+@if(Session::has('success'))
+    <div style="color: green;">{{ Session::get('success') }}</div>
+@elseif(Session::has('error'))
+    <div style="color: red;">{{ Session::get('error') }}</div>
 @endif
 
 <form method="post" action="{{ route('saveAllData', $id) }}">
     @csrf
     <label for="CoachName">Choose Coach:</label>
-    <select name="CoachName" required>
+    <select name="CoachName" id="CoachName" required>
         <option value="نورة مسفر">نورة مسفر</option>
         <option value="غسان الاحمدي">غسان الاحمدي</option>
         <option value="نايف اكرد">نايف اكرد</option>
     </select>
+    @error('CoachName')
+        <small style="color: red;">{{ $message }}</small>
+    @enderror
 
     <label for="chosen_datetime">Choose Date and Time:</label>
-    <input id="hours" type="datetime-local" step="3600" name="chosen_datetime" required>
+    <input
+        id="hours"
+        type="datetime-local"
+        step="3600"
+        onfocus="clearMinutes(this)"
+        oninput="updateMinutes(this)"
+        name="chosen_datetime"
+        required>
+    @error('chosen_datetime')
+    <small style="color: red;">{{ $message }}</small>
+    @enderror
 
     <button type="submit">Submit</button>
 </form>
 
 <script>
-    // Add event listener to enforce hour-only format
-    document.getElementById('hours').addEventListener('input', function (event) {
-        // Get the current input value
-        let inputValue = event.target.value;
-
-        // Format the input value to exclude minutes
-        if (inputValue.length > 16) {
-            event.target.value = inputValue.slice(0, 16);
-        }
-    });
+    function clearMinutes(input) {
+        // Clear the minutes part when the input is focused
+        input.value = input.value.replace(/:\d{2}$/, ':00');
+    }
+    function updateMinutes(input) {
+        // Set minutes to "00" for the selected date and time
+        input.value = input.value.replace(/:\d{2}$/, ':00');
+    }
 </script>
-
 </body>
 </html>

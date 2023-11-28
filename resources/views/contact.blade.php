@@ -31,27 +31,29 @@
 <body>
 <h1>Contact Form</h1>
 
-@if(session('success'))
-    <div style="color: green;">{{ session('success') }}</div>
-@elseif(session('error'))
-    <div style="color: red;">{{ session('error') }}</div>
+@if(Session::has('success'))
+    <div style="color: green;">{{ Session::get('success') }}</div>
+@elseif(Session::has('error'))
+    <div style="color: red;">{{ Session::get('error') }}</div>
 @endif
 
 <form method="post" action="{{ route('saveFirst') }}">
     @csrf
     <label for="ClientName">Your Name:</label>
-    <input type="text" name="ClientName" required>
-    @error('')
+    <input type="text" name="ClientName" id="ClientName">
+    @error('ClientName')
+        <small style="color: red;">{{ $message }}</small>
     @enderror
-
     <label for="phone">Your Phone Number:</label>
-    <input type="text" name="phone" required>
-    @error('')
+    <input type="text" name="phone" id="phone">
+    @error('phone')
+        <small style="color: red;">{{ $message }}</small>
     @enderror
 
     <label for="mail">Your Email:</label>
-    <input type="email" name="mail" required>
-    @error('')
+    <input type="text" name="mail" id="mail">
+    @error('mail')
+        <small style="color: red;">{{ $message }}</small>
     @enderror
 
     <button type="submit">Next</button>
