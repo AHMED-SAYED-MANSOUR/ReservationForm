@@ -13,6 +13,9 @@ Route::post('/contact/saveFirst', [ContactController::class, 'store'])->name('sa
 Route::get('/coach/{id}', [ContactController::class, 'showCoachForm'])->name('coach');
 Route::post('/saveAllData/{id}', [ContactController::class, 'saveAllData'])->name('saveAllData');
 
+Route::get('/success' , [ContactController::class, 'Thankyou'])->name('success');
+
+
 
 
 

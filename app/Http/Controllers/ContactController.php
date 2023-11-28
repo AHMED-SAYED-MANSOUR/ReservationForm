@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AppointmentConfirmation;
+use Illuminate\Support\Facades\Redirect;
 
 class ContactController extends Controller
 {
@@ -53,11 +54,12 @@ class ContactController extends Controller
             'chosen_datetime'=>$request['chosen_datetime'],
         ]);
 
+        return redirect()->route('success');
     }
 
-
-
-
-
+    public function Thankyou()
+    {
+        return view("success");
+    }
 }
 
