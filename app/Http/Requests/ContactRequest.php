@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ContactRequest extends FormRequest
@@ -27,7 +28,12 @@ class ContactRequest extends FormRequest
             'phone' => 'required|numeric|regex:/^[0-9\s\-\(\)]{1,30}$/',
             'mail' => 'required|email',
             'CoachName' => 'nullable',
-            'chosen_datetime' => 'nullable|date|after:now|unique:contacts,chosen_datetime,' . $id,
+            'chosen_datetime' => [
+                'nullable',
+                'date',
+                'after:now',
+                Rule::unique('contacts', 'chosen_datetime')->ignore($id),
+            ],
         ];
     }
     public function messages()

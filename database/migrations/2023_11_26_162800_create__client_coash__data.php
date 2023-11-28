@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string("phone");
             $table->string("mail");
             // Coach Data
-            $table->string("CoachName");
-            $table->dateTime('chosen_datetime');
+            $table->string('CoachName')->nullable(false)->change();
+            $table->dateTime('chosen_datetime')->nullable(false)->change();
 //            $table->date("ReservationDay");
 //            $table->time("ReservationTime");
             $table->boolean("Trigger")->default(true);

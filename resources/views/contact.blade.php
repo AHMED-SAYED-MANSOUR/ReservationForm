@@ -55,6 +55,8 @@
     @error('mail')
         <small style="color: red;">{{ $message }}</small>
     @enderror
+    <input type="hidden" name="CoachName" id="CoachName" value="">
+    <input type="hidden" name="chosen_datetime" id="CoachName" value="">
 
     <button type="submit">Next</button>
 </form>

@@ -23,6 +23,8 @@ class ContactController extends Controller
             'ClientName' => $request->input('ClientName'),
             'phone' => $request->input('phone'),
             'mail' => $request->input('mail'),
+            'CoachName' => $request->input('CoachName'),
+            'chosen_datetime' => $request->input('chosen_datetime'),
         ]);
 
         return redirect()->route('coach')->with('success', 'Data from the first form stored successfully.');
