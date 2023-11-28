@@ -6,7 +6,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 
 Route::get('/contact', [ContactController::class, 'index']);
-Route::post('/contact', [ContactController::class, 'store']);
+Route::post('/contact/saveFirst', [ContactController::class, 'store'])->name('saveFirst');
+
+
+// Show Coach Form And Save
+Route::get('/coach/{id}', [ContactController::class, 'showCoachForm'])->name('coach');
+Route::post('/saveAllData/{id}', [ContactController::class, 'saveAllData'])->name('saveAllData');
+
+
 
 
 /*

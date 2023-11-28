@@ -37,7 +37,7 @@
     <div style="color: red;">{{ session('error') }}</div>
 @endif
 
-<form method="post" action="{{ url('/contact') }}">
+<form method="post" action="{{ route('saveFirst') }}">
     @csrf
     <label for="ClientName">Your Name:</label>
     <input type="text" name="ClientName" required>

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Contact extends Model
 {
     protected $fillable = [
-        'ClientName', 'phone', 'mail', 'trigger', 'CoashName', 'chosen_datetime'
+        'ClientName', 'phone', 'mail', 'trigger', 'CoashName', 'chosen_datetime', 'id'
     ];
     protected $rules = [
         'ClientName' => 'required|string',

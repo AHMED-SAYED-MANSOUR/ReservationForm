@@ -37,7 +37,7 @@
     <div style="color: red;">{{ session('error') }}</div>
 @endif
 
-<form method="post" action="{{ url('/contact') }}">
+<form method="post" action="{{ route('saveAllData', $id) }}">
     @csrf
     <label for="CoashName">Choose Coach:</label>
     <select name="CoashName" required>
